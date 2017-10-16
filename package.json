@@ -1,6 +1,6 @@
 {
   "name": "trails-to-sdks",
-  "version": "0.0.1",
+  "version": "1.0.0-alpha.1",
   "description": "Generate SDKs from a TrailsJs App",
   "main": "gulpfile.js",
   "repository": "https://github.com/matteozambon89/trails-to-sdks",

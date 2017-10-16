@@ -1,0 +1,40 @@
+/**
+ * @Author: Matteo Zambon <Matteo>
+ * @Date:   2017-08-13 02:57:18
+ * @Last modified by:   Matteo
+ * @Last modified time: 2017-08-17 01:08:44
+ */
+
+const {{modelPrefix}}BaseModel = require('../base-model')
+
+module.exports = class {{modelPrefix}}{{modelName}} extends {{modelPrefix}}BaseModel {
+  constructor(data) {
+    super()
+
+    for (const name in data) {
+      this[name] = data[name]
+    }
+  }
+
+  get modelName() {
+    return '{{modelPrefix}}{{modelName}}'
+  }
+
+  toString() {
+    return JSON.stringify(this.data)
+  }
+  toObject() {
+    return JSON.parse(this.toString())
+  }
+
+  {{#properties}}
+  get {{name}} () {
+    return this._data.{{name}}
+  }
+
+  set {{name}}(value) {
+    this._data.{{name}} = value
+  }
+
+  {{/properties}}
+}

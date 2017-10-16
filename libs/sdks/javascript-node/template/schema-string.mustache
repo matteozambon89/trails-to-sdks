@@ -1,0 +1,16 @@
+  'type': 'string',
+  {{#maxLength}}
+  'maxLength': {{maxLength}},
+  {{/maxLength}}
+  {{#minLength}}
+  'minLength': {{minLength}},
+  {{/minLength}}
+  {{#pattern}}
+  'pattern': '{{{pattern}}}',
+  {{/pattern}}
+  {{#format}}
+  'format': '{{{format}}}'
+  {{/format}}
+  {{#default}}
+  'default': '{{{default}}}',
+  {{/default}}

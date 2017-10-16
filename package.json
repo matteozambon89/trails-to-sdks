@@ -1,0 +1,60 @@
+{
+  "name": "trails-to-sdks",
+  "version": "0.0.1",
+  "description": "Generate SDKs from a TrailsJs App",
+  "main": "gulpfile.js",
+  "repository": "https://github.com/matteozambon89/trails-to-sdks",
+  "author": {
+    "name": "Matteo Zambon",
+    "email": "matteo@thetophat.org",
+    "url": "https://github.com/matteozambon89"
+  },
+  "keywords": [
+    "matteozambon89",
+    "client",
+    "rest",
+    "trails",
+    "trailsjs",
+    "sdk",
+    "generator",
+    "packager"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "ajv": "^5.2.2",
+    "array-uniq": "^1.0.3",
+    "async": "^2.5.0",
+    "chalk": "^2.1.0",
+    "del": "^3.0.0",
+    "eslint": "^4.4.1",
+    "eslint-config-trails": "^3.0.0",
+    "eslint-plugin-json": "^1.2.0",
+    "eslint-plugin-markdown": "^1.0.0-beta.6",
+    "eslint-plugin-mocha": "^4.11.0",
+    "extend": "^3.0.1",
+    "fixme": "^0.4.3",
+    "fs-extra": "^4.0.2",
+    "gulp": "^3.9.1",
+    "gulp-eslint": "^4.0.0",
+    "gulp-jsbeautifier": "^2.1.1",
+    "gulp-load-plugins": "^1.5.0",
+    "gulp-mustache": "^3.0.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-util": "^3.0.8",
+    "humps": "^2.0.1",
+    "is-domain-name": "^1.0.1",
+    "is-ip": "^2.0.0",
+    "minimist": "^1.2.0",
+    "mkdirp": "^0.5.1",
+    "nsp": "^2.7.0",
+    "ora": "^1.3.0",
+    "semver": "^5.4.1",
+    "string-template": "^1.0.0",
+    "trails": "2.0.2",
+    "validate-npm-package-license": "^3.0.1",
+    "winston": "^2.4.0"
+  },
+  "scripts": {
+    "sdk-build": "./node_modules/.bin/gulp sdk-build"
+  }
+}

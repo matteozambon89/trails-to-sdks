@@ -1,0 +1,69 @@
+/**
+ * @Author: Matteo Zambon <Matteo>
+ * @Date:   2017-08-13 01:51:45
+ * @Last modified by:   Matteo
+ * @Last modified time: 2017-08-17 01:10:59
+ */
+
+const humps = require('humps')
+const Ajv = require('ajv')
+
+module.exports = class {{prefix}}BaseModel {
+  constructor() {
+    this._data = {}
+
+    this._isValid = true
+    this._errors = {}
+  }
+
+  get schema() {
+    if (this._schema) {
+      return this._schema
+    }
+
+    const fileName = humps.decamelize(this.modelName, {'separator': '-'})
+    return this._schema = require('../schema/' + fileName)
+  }
+
+  get isValid() {
+    return this._isValid
+  }
+
+  get errors() {
+    return this._errors
+  }
+
+  validate() {
+    if (this._validator) {
+      const data = this.data
+
+      this._isValid = this._validator(data)
+      this._errors = this._validator.errors
+      this._data = data
+
+      return this._isValid
+    }
+
+    const schema = this.schema
+    const ajv = new Ajv()
+    this._validator = ajv.compile(schema)
+
+    return this.validate()
+  }
+
+  get data() {
+    return this._data
+  }
+
+  set data(e) {
+    throw new Error('Data is read-only')
+  }
+
+  static arrayToModels(array) {
+    const Model = this
+
+    return array.map(el => {
+      return new Model(el)
+    })
+  }
+}

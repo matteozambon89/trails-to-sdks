@@ -1,0 +1,110 @@
+/**
+ * @Author: Matteo Zambon <Matteo>
+ * @Date:   2017-08-13 01:51:45
+ * @Last modified by:   Matteo
+ * @Last modified time: 2017-10-14 11:55:44
+ */
+
+const url = require('url')
+const extend = require('extend')
+const got = require('got')
+const path = require('path')
+const template = require('url-template')
+const humps = require('humps')
+
+function formUrl(urlObj) {
+  const finalUrlObj = extend(true, {}, this._baseUrlObj, this.auth, urlObj)
+
+  finalUrlObj.pathname = path.resolve(this._baseUrlObj.pathname, urlObj.pathname)
+
+  return url.format(finalUrlObj)
+}
+
+function formRequestOptions(options) {
+  return extend(true, {}, this._defaultRequestOptions, options)
+}
+
+module.exports = class {{prefix}}Client {
+  constructor(props) {
+    this._defaultBaseUrlObj = {
+      {{#api.protocol}}
+      'protocol': '{{{api.protocol}}}',
+      {{/api.protocol}}
+      {{#api.port}}
+      'port': {{api.port}},
+      {{/api.port}}
+      {{#api.hostname}}
+      'hostname': '{{{api.hostname}}}',
+      {{/api.hostname}}
+    }
+    this._defaultRequestOptions = {
+      'json': true,
+      {{#api.userAgent}}
+      'user-agent': '{{{api.userAgent}}}',
+      {{/api.userAgent}}
+      {{^api.userAgent}}
+      'user-agent': '{{prjName}}/{{version}} ({{{homepage}}})',
+      {{/api.userAgent}}
+    }
+
+    this._baseUrlObj = extend(true, {}, this._defaultBaseUrlObj, props.domain)
+    this._requestOptions = extend(true, {}, this._defaultRequestOptions, props.requestOptions)
+  }
+
+  request(method, urlObj, options, model) {
+    const client = this
+
+    const url = formUrl.bind(client)(urlObj)
+
+    method = method || 'get'
+    method = method.toLowerCase()
+    options = formRequestOptions.bind(client)(options)
+
+    return new Promise((resolve, reject) => {
+      got[method](url, options)
+        .then(response => {
+          const body = response.body
+
+          if (!model) {
+            resolve(response)
+            return
+          }
+
+          const Model = client.getPrefixedModel(model)
+
+          if (Array.isArray(body)) {
+            resolve(Model.arrayToModels(body))
+            return
+          }
+
+          resolve(new Model(body))
+        })
+        .catch(err => {
+          reject(err)
+        })
+    })
+  }
+  getPrefixedModel(model) {
+    const prefix = humps.pascalize('{{prefix}}')
+    const modelName = humps.pascalize(model)
+
+    const fileName = humps.decamelize([prefix, modelName].join(''), {'separator': '-'})
+
+    return require('./models/' + fileName)
+  }
+
+  {{#routes}}
+
+  {{name}}(params, options) {
+    const client = this
+
+    const url = template.parse('{{{path}}}')
+
+    const urlObj = {
+      'pathname': url.expand(params)
+    }
+
+    return client.request('{{method}}', urlObj, options, params.model || null)
+  }
+  {{/routes}}
+}

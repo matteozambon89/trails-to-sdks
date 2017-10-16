@@ -1,0 +1,20 @@
+  'type': 'object',
+  'properties': {
+    {{#properties}}
+      {{> schema-property}},
+    {{/properties}}
+  },
+  {{#additionalPropertyString}}
+  'additionalProperties': {{{additionalPropertyString}}},
+  {{/additionalPropertyString}}
+  {{^additionalProperty}}
+  'additionalProperties': false,
+  {{/additionalProperty}}
+  'required': [
+    {{#required}}
+      '{{.}}',
+    {{/required}}
+  ],
+  {{#default}}
+  'default': {{{default}}},
+  {{/default}}

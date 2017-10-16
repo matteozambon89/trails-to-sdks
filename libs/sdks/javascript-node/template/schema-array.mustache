@@ -1,0 +1,24 @@
+  'type': 'array',
+  'items': [
+    {{#type}}
+      {{> schema-property}},
+    {{/type}}
+  ],
+  {{#maxItems}}
+  'maxItems': maxItems,
+  {{/maxItems}}
+  {{#minItems}}
+  'minItems': minItems,
+  {{/minItems}}
+  {{#uniqueItems}}
+  'uniqueItems': uniqueItems,
+  {{/uniqueItems}},
+  {{#additionalItemsString}}
+  'additionalItems': {{{additionalItemsString}}},
+  {{/additionalItemsString}}
+  {{^additionalItemsString}}
+  'additionalItems': false,
+  {{/additionalItemsString}}
+  {{#default}}
+  'default': {{{default}}},
+  {{/default}}

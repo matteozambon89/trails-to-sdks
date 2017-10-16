@@ -1,0 +1,61 @@
+{
+  "name": "{{prjName}}",
+  "version": "{{#version}}{{version}}{{/version}}{{^version}}1.0.0{{/version}}",
+  "description": "{{description}}",
+  "keywords": {{#keywordsString}}{{{keywordsString}}}{{/keywordsString}}{{^keywordsString}}["trails", "trailpack-sdk-generator", "trailpack", "sdk", "generator", "generated"]{{/keywordsString}},
+  "homepage": "{{{homepage}}}",
+  {{#bugs}}
+  "bugs": {
+    "url" : "{{{url}}}",
+    "email" : "{{{email}}}"
+  },
+  {{/bugs}}
+  {{#license}}
+  "license": "{{license}}",
+  {{/license}}
+  {{#author}}
+  "author": {
+    "name": "{{name}}",
+    "email": "{{email}}",
+    "url": "{{{url}}}"
+  },
+  {{/author}}
+  "contributors": {{#contributorsString}}{{{contributorsString}}}{{/contributorsString}}{{^contributorsString}}[]{{/contributorsString}},
+  "main": "index.js",
+  {{#repository}}
+  "repository": {
+    "type" : "{{type}}",
+    "url" : "{{{url}}}"
+  },
+  {{/repository}}
+  {{#private}}
+  "private": true,
+  {{/private}}
+  "scripts": {
+    "eslint": "./node_modules/.bin/eslint --ext .json --ext .js .",
+    "pretest": "npm run eslint",
+    "test": "./node_modules/.bin/mocha",
+    "posttest": "./node_modules/.bin/nsp check"
+  },
+  "devDependencies": {
+    "chai": "^4.1.0",
+    "env-test": "^1.0.0",
+    "eslint": "^4.3.0",
+    "eslint-config-trails": "^3.0.0",
+    "eslint-plugin-json": "^1.2.0",
+    "eslint-plugin-markdown": "^1.0.0-beta.6",
+    "eslint-plugin-mocha": "^4.11.0",
+    "mocha": "^3.4.2",
+    "nsp": "^2.6.3",
+    "supertest": "^3.0.0"
+  },
+  "dependencies": {
+    "ajv": "^5.2.3",
+    "got": "^7.1.0",
+    "humps": "^2.0.1",
+    "extend": "^3.0.1",
+    "url": "^0.11.0",
+    "string-template": "^1.0.0",
+    "url-template": "^2.0.8"
+  }
+}

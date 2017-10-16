@@ -1,0 +1,26 @@
+'{{name}}': {
+  {{#typeNumber}}
+  {{> schema-number}}
+  {{/typeNumber}}
+  {{#typeInteger}}
+  {{> schema-number}}
+  {{/typeInteger}}
+  {{#typeBoolean}}
+  {{> schema-number}}
+  {{/typeBoolean}}
+  {{#typeString}}
+  {{> schema-string}}
+  {{/typeString}}
+  {{#typeObject}}
+  {{> schema-object}}
+  {{/typeObject}}
+  {{#typeArray}}
+  {{> schema-array}}
+  {{/typeArray}}
+  {{#enum}}
+  'enum': {{enum}},
+  {{/enum}}
+  {{#const}}
+  'const': {{const}},
+  {{/const}}
+}

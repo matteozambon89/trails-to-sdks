@@ -1,0 +1,33 @@
+{
+  "global": {
+    "trailsApp": "../app",
+    "prefix": "Trails",
+    "version": "0.0.1",
+    "license": "UNLICENSED",
+    "author": {
+      "name" : "Your Name",
+      "email" : "email@domain.com",
+      "url" : "https://domain.com/team/your-name"
+    },
+    "keywords": ["trails", "sdk"],
+    "contributors": [],
+    "api": {
+      "protocol": "https",
+      "hostname": "api.domain.com"
+    }
+  },
+  "sdks": {
+    "javascript-node": {
+      "prjName": "js-node-sdk",
+      "description": "SDK for Node.Js",
+      "homepage": "https://docs.domain.com/sdk/javascript-node",
+      "bugs": {
+        "url": "https://gihub.com/your-username/javascript-node-sdk/issues",
+        "email": "dev@domain.com"
+      },
+      "repository": {
+        "url": "https://gihub.com/your-username/javascript-node-sdk.git"
+      }
+    }
+  }
+}
